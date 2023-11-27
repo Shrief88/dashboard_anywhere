@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: CircularStd;
+  src: url(./../public/fonts/CircularStd-Bold.woff2);
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: CircularStd;
+  src: url(./../public/fonts/CircularStd-Black.woff2);
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: CircularStd;
+  src: url(./../public/fonts/CircularStd-Medium.woff2);
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: CircularStd;
+  src: url(./../public/fonts/CircularStd-Book.woff2);
+  font-weight: light;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: CircularStd;
+  src: url(./../public/fonts/CircularStd-Bold.woff2);
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+body {
+  margin: 0;
+  font-family: CircularStd, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
