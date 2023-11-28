@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
 console.log(
-  'This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://cooluser:coolpassword@cluster0.lz91hw2.mongodb.net/local_library?retryWrites=true&w=majority"'
+  'This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://your_username:your_password@cluster0.lz91hw2.mongodb.net/your_db_name?retryWrites=true&w=majority"'
 );
 
 // Get arguments passed on command line
 const userArgs: string[] = process.argv.slice(2);
 
-import { Model } from "mongoose";
 import mongoose from "mongoose";
 import { QuizModel } from "./src/models/Quiz";
-import { IInstructor, InstructorModel } from "./src/models/Instructor";
+import { InstructorModel } from "./src/models/Instructor";
 import { AnnouncementModel } from "./src/models/Announcement";
 
 const mongodb = userArgs[0];
@@ -50,6 +49,7 @@ const quizCreate = async (
 };
 
 const instructorCreate = async (
+  id: number,
   first_name: string,
   family_name: string,
   position: string,
@@ -57,6 +57,7 @@ const instructorCreate = async (
   Gender: string
 ) => {
   const newInstructor = InstructorModel.create({
+    id,
     first_name,
     family_name,
     position,
@@ -79,20 +80,20 @@ const createAnnouncements = async () => {
     announcementCreate(
       "This is an announcement",
       (
-        await InstructorModel.findOne({ first_name: "Ahmed" })
-      )?.id
+        await InstructorModel.findOne({ id: 1 })
+      )?._id
     ),
     announcementCreate(
       "This is an announcement",
       (
-        await InstructorModel.findOne({ first_name: "Salma" })
-      )?.id
+        await InstructorModel.findOne({ id: 2 })
+      )?._id
     ),
     announcementCreate(
       "This is an announcement",
       (
-        await InstructorModel.findOne({ first_name: "Emad" })
-      )?.id
+        await InstructorModel.findOne({ id: 3 })
+      )?._id
     ),
   ]);
 };
@@ -118,9 +119,24 @@ const createQuizzes = async () => {
 
 const createInstructors = async () => {
   await Promise.all([
-    instructorCreate("Ahmed", "Mustafa", "Math 101", "/images/2.jpg", "male"),
-    instructorCreate("Salma", "Ahmed", "Physics 02", "/images/1.png", "female"),
     instructorCreate(
+      1,
+      "Ahmed",
+      "Mustafa",
+      "Math 101",
+      "/images/2.jpg",
+      "male"
+    ),
+    instructorCreate(
+      2,
+      "Salma",
+      "Ahmed",
+      "Physics 02",
+      "/images/1.png",
+      "female"
+    ),
+    instructorCreate(
+      3,
       "Emad",
       "Mustafa",
       "event Manger",
