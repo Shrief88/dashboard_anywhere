@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 mongoose
   .connect(
-    `mongodb+srv://${db_admin}:${db_password}@cluster0.t8sswhx.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://${db_admin}:${db_password}@cluster0.t8sswhx.mongodb.net/?retryWrites=true&w=majority`,
   )
   .then(() => {
     app.listen(port, host, () => {
