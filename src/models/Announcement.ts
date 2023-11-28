@@ -3,12 +3,12 @@ import { IInstructor } from "./Instructor";
 
 export interface IAnnouncement extends Document {
   content: string;
-  user: mongoose.Types.ObjectId | IInstructor["_id"];
+  instructor: mongoose.Types.ObjectId | IInstructor["_id"];
 }
 
 const AnnouncementSchema: Schema = new Schema({
   content: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: "Instructor", required: true },
+  instructor: { type: Schema.Types.ObjectId, ref: "Instructor", required: true },
 });
 
 
