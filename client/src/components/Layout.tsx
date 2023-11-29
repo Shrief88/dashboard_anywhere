@@ -1,5 +1,6 @@
 import { Button, Overlay, useSidebar } from '@rewind-ui/core';
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import SideBar from './SideBar';
@@ -20,7 +21,7 @@ const Layout = () => {
     <div className='className="relative flex flex-row w-full h-full min-h-[35rem]"'>
       <SideBar onExpand={handleExpand} onMobile={handleMobile} />
       <main
-        className={`transition-all transform duration-100 text-slate-700 flex w-full flex-col items-center ${
+        className={`transition-all transform duration-100 text-slate-700 bg-slate-100 w-full  ${
           expanded ? 'md:ml-64' : 'md:ml-20'
         }`}
       >
@@ -54,6 +55,7 @@ const Layout = () => {
             </svg>
           </Button>
         </header>
+        <Outlet />
       </main>
     </div>
   );
