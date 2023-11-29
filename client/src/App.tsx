@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -9,8 +9,9 @@ function App() {
     <Router>
       <div className="w-full h-screen">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Home />} />
           <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>

@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [announcements, setAnnouncement] = useState<Array<IAnnouncement>>([]);
   const [instructors, setInstructor] = useState<Array<IInstructor>>([]);
   const [quizzes, setQuiz] = useState<Array<IQuiz>>([]);
+  console.log('ss');
 
   useEffect(() => {
     const fetchData = async () => {

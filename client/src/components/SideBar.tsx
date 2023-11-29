@@ -6,7 +6,10 @@ import SchoolIcon from '@mui/icons-material/School';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { Sidebar, SidebarState } from '@rewind-ui/core';
 
-function SideBar(props) {
+function SideBar(props: {
+  onExpand: (arg: boolean) => void;
+  onMobile: (arg: boolean) => void;
+}) {
   const clearAuth = () => {
     localStorage.clear();
   };
