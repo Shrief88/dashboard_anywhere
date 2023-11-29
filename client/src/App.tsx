@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard';
 function App() {
   return (
     <Router>
-      <div className="w-full h-full">
+      <div className="w-full h-screen">
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />

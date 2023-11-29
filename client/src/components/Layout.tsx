@@ -18,10 +18,10 @@ const Layout = () => {
     setMobile(value);
   };
   return (
-    <div className='className="relative flex flex-row w-full h-full min-h-[35rem]"'>
+    <div className='className="relative flex flex-row w-full h-full overflow-hidden"'>
       <SideBar onExpand={handleExpand} onMobile={handleMobile} />
       <main
-        className={`transition-all transform duration-100 text-slate-700 bg-slate-100 w-full  ${
+        className={`transition-all transform duration-100 text-slate-700 bg-slate-100 w-full${
           expanded ? 'md:ml-64' : 'md:ml-20'
         }`}
       >

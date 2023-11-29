@@ -6,3 +6,5 @@ axios.defaults.headers['Content-type'] = 'application/json';
 export const getAllAnnouncements = () => axios.get('/announcement');
 
 export const getInstructorById = (id: string) => axios.get(`/instructor/${id}`);
+
+export const getAllQuizzes = () => axios.get('/quiz');

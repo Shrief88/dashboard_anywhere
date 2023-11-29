@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 
 import Announcement from '../components/Announcement';
 import Quiz from '../components/Quiz';
-import { getAllAnnouncements, getInstructorById } from '../data';
-import { IAnnouncement, IInstructor } from '../interfaces';
+import { getAllAnnouncements, getAllQuizzes, getInstructorById } from '../data';
+import { IAnnouncement, IInstructor, IQuiz } from '../interfaces';
 
 const Dashboard = () => {
   const [announcements, setAnnouncement] = useState<Array<IAnnouncement>>([]);
   const [instructors, setInstructor] = useState<Array<IInstructor>>([]);
+  const [quizzes, setQuiz] = useState<Array<IQuiz>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: Array<IAnnouncement> = (await getAllAnnouncements()).data;
-        setAnnouncement(data.data);
-        for (const item of data.data) {
+        const announcementData: Array<IAnnouncement> = (await getAllAnnouncements()).data
+          .data;
+        const quizData = (await getAllQuizzes()).data.data;
+        setQuiz(quizData);
+        setAnnouncement(announcementData);
+        for (const item of announcementData) {
           const instructorData = (await getInstructorById(item.instructor)).data;
           setInstructor((prevArray) => [...prevArray, instructorData.data]);
         }
@@ -24,6 +28,21 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
+
+  console.log(quizzes);
+  let quizList: JSX.Element[] = [];
+  if (quizzes.length > 0) {
+    quizList = quizzes.map((item) => (
+      <Quiz
+        key={item.title}
+        title={item.title}
+        course={item.course}
+        topic={item.topic}
+        due_to_day={item.due_to_day}
+        due_to_hour={item.due_to_hour}
+      />
+    ));
+  }
 
   let announcementsList: JSX.Element[] = [];
   if (announcements.length > 0 && instructors.length === announcements.length) {
@@ -55,14 +74,18 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-col-1 xl:grid-cols-4 lg:grid-cols-3  mt-6 gap-12">
-        <div className="flex flex-col xl:col-span-3 lg:col-span-2  items-start p-4 bg-white gap-3 rounded-lg shadow-md">
-          <h1 className="text-xl">Announcements</h1>
-          {announcementsList}
+        <div className="xl:col-span-3 lg:col-span-2">
+          <div className="flex flex-col items-start p-4 bg-white gap-3 rounded-lg shadow-md">
+            <h1 className="text-xl">Announcements</h1>
+            {announcementsList}
+          </div>
         </div>
 
-        <div className="flex flex-col lg:col-span-1 items-start p-4 bg-white gap-3 rounded-lg shadow-md">
-          <h1 className="text-xl">what's due</h1>
-          <Quiz />
+        <div className="lg:col-span-1">
+          <div className="flex flex-col p-4 bg-white gap-3 rounded-lg shadow-md">
+            <h1 className="text-xl">what's due</h1>
+            {quizList}
+          </div>
         </div>
       </div>
     </div>
