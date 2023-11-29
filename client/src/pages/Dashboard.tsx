@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Announcement from '../components/Announcement';
 import Quiz from '../components/Quiz';
+import { getAllAnnouncements, getInstructorById } from '../data';
+import { IAnnouncement, IInstructor } from '../interfaces';
 
 const Dashboard = () => {
+  const [announcements, setAnnouncement] = useState<Array<IAnnouncement>>([]);
+  const [instructors, setInstructor] = useState<Array<IInstructor>>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data: Array<IAnnouncement> = (await getAllAnnouncements()).data;
+        setAnnouncement(data);
+        for (const item of data.data) {
+          const instructorData = (await getInstructorById(item.instructor)).data;
+          setInstructor((prevArray) => [...prevArray, instructorData.data]);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="p-8">
       <div className="flex flex-col items-start p-8 bg-white gap-3 rounded-lg shadow-md">
