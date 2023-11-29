@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import requireAuth from '../Auth/requireAuth';
 import Announcement from '../components/Announcement';
 import Quiz from '../components/Quiz';
 import { getAllAnnouncements, getAllQuizzes, getInstructorById } from '../data';
@@ -29,7 +30,6 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  console.log(quizzes);
   let quizList: JSX.Element[] = [];
   if (quizzes.length > 0) {
     quizList = quizzes.map((item) => (
@@ -68,7 +68,7 @@ const Dashboard = () => {
           ready for your exams
         </p>
         <i>"Nothing happens until something moves" -Albert Einstein</i>
-        <button className="bg-blue-500 text-white text-lg px-4 py-2 rounded-lg">
+        <button className="bg-blue-700 text-white text-lg px-4 py-2 rounded-lg">
           View exams tips
         </button>
       </div>
@@ -92,4 +92,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default requireAuth(Dashboard);

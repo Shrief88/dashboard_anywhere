@@ -8,7 +8,6 @@ interface AnnouncementProps {
 }
 
 const Announcement = (props: AnnouncementProps) => {
-  console.log(props.photoUrl);
   return (
     <div className="grid grid-col-1 xl:grid-cols-4 gap-2">
       <div className="flex gap-4 items-center col-span-1">

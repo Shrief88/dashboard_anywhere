@@ -21,7 +21,7 @@ const Layout = () => {
     <div className='className="relative flex flex-row w-full h-full overflow-hidden"'>
       <SideBar onExpand={handleExpand} onMobile={handleMobile} />
       <main
-        className={`transition-all transform duration-100 text-slate-700 w-full bg-slate-100 ${
+        className={`transition-all transform duration-100 text-slate-700 w-full bg-slate-100 h-screen ${
           expanded ? 'md:ml-64' : 'md:ml-20'
         }`}
       >
@@ -35,7 +35,7 @@ const Layout = () => {
           />
         )}
         <div className=" bg-slate-100 w-full">
-          <header className="flex flex-row sticky top-0 items-center bg-white border-b border-b-gray-100 w-full shadow-sm min-h-[4rem]">
+          <header className="flex flex-row  top-0 items-center bg-white border-b border-b-gray-100 w-full shadow-sm min-h-[4rem]">
             <AppBar />
 
             <Button

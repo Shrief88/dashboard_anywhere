@@ -21,7 +21,7 @@ const Quiz = (props: QuizProps) => {
       <p>Course : {props.course}</p>
       <p>Topic : {props.topic}</p>
       <p>Due to : {handleDate()}</p>
-      <button className="w-40 border-2 mt-4 border-blue-800 px-9 py-1 rounded-lg hover:bg-blue-800 hover:text-white self-center">
+      <button className="w-40 border-2 mt-4 border-blue-800 px-9 py-1 rounded-lg hover:bg-blue-700 hover:text-white self-center">
         Start quiz
       </button>
     </div>
