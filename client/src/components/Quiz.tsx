@@ -13,7 +13,12 @@ const Quiz = (props: QuizProps) => {
     const day = date.getDate() - 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+
+    const hour =
+      props.due_to_hour > 12
+        ? `${props.due_to_hour - 12}:00 PM`
+        : `${props.due_to_hour}:00 AM`;
+    return `${day}/${month}/${year} - ${hour}`;
   };
 
   return (

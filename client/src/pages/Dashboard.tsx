@@ -67,7 +67,7 @@ const Dashboard = () => {
           Here we are, And you ready to fight? Do not worry, we prepared some tips to be
           ready for your exams
         </p>
-        <i>"Nothing happens until something moves" -Albert Einstein</i>
+        <i>"Nothing happens until something moves" - Albert Einstein</i>
         <button className="bg-blue-700 text-white text-lg px-4 py-2 rounded-lg">
           View exams tips
         </button>
