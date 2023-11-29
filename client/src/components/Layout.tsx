@@ -2,7 +2,7 @@ import { Button, Overlay, useSidebar } from '@rewind-ui/core';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import NavBar from './NavBar';
+import AppBar from './AppBar';
 import SideBar from './SideBar';
 
 const Layout = () => {
@@ -36,7 +36,7 @@ const Layout = () => {
         )}
         <div className=" bg-slate-100 w-full">
           <header className="flex flex-row sticky top-0 items-center bg-white border-b border-b-gray-100 w-full shadow-sm min-h-[4rem]">
-            <NavBar />
+            <AppBar />
 
             <Button
               onClick={() => {
