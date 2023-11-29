@@ -13,7 +13,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const data: Array<IAnnouncement> = (await getAllAnnouncements()).data;
-        setAnnouncement(data);
+        setAnnouncement(data.data);
         for (const item of data.data) {
           const instructorData = (await getInstructorById(item.instructor)).data;
           setInstructor((prevArray) => [...prevArray, instructorData.data]);
@@ -24,6 +24,21 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
+
+  let announcementsList: JSX.Element[] = [];
+  if (announcements.length > 0 && instructors.length === announcements.length) {
+    announcementsList = announcements.map((item, index) => (
+      <Announcement
+        key={item.instructor}
+        first_name={instructors[index].first_name}
+        family_name={instructors[index].family_name}
+        Gender={instructors[index].Gender}
+        position={instructors[index].position}
+        content={item.content}
+        photoUrl={instructors[index].photoUrl}
+      />
+    ));
+  }
 
   return (
     <div className="p-8">
@@ -39,10 +54,10 @@ const Dashboard = () => {
         </button>
       </div>
 
-      <div className="grid grid-col-1 lg:grid-cols-4 mt-6 gap-12">
-        <div className="flex flex-col lg:col-span-3 items-start p-4 bg-white gap-3 rounded-lg shadow-md">
+      <div className="grid grid-col-1 xl:grid-cols-4 lg:grid-cols-3  mt-6 gap-12">
+        <div className="flex flex-col xl:col-span-3 lg:col-span-2  items-start p-4 bg-white gap-3 rounded-lg shadow-md">
           <h1 className="text-xl">Announcements</h1>
-          <Announcement />
+          {announcementsList}
         </div>
 
         <div className="flex flex-col lg:col-span-1 items-start p-4 bg-white gap-3 rounded-lg shadow-md">
