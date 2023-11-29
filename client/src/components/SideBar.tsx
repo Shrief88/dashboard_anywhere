@@ -27,24 +27,38 @@ function SideBar(props) {
           <Sidebar.Nav.Section.Item
             icon={<DashboardIcon />}
             label="Dashboard"
+            className="hover:bg-blue-700"
             href="#"
             active
           />
           <Sidebar.Nav.Section.Item
             icon={<CalendarMonthIcon />}
             label="Schedule"
+            className="hover:bg-blue-700"
             href="#"
           />
-          <Sidebar.Nav.Section.Item icon={<ArticleIcon />} label="Courses" href="#" />
-          <Sidebar.Nav.Section.Item icon={<SchoolIcon />} label="Gradebook" href="#" />
+          <Sidebar.Nav.Section.Item
+            className="hover:bg-blue-700"
+            icon={<ArticleIcon />}
+            label="Courses"
+            href="#"
+          />
+          <Sidebar.Nav.Section.Item
+            className="hover:bg-blue-700"
+            icon={<SchoolIcon />}
+            label="Gradebook"
+            href="#"
+          />
 
           <Sidebar.Nav.Section.Item
             icon={<TrendingUpIcon />}
             label="Performance"
+            className="hover:bg-blue-700"
             href="#"
           />
           <Sidebar.Nav.Section.Item
             icon={<CampaignIcon />}
+            className="hover:bg-blue-700"
             label="Announcements"
             href="#"
           />
