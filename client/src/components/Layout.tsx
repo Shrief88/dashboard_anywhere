@@ -1,8 +1,8 @@
 import { Button, Overlay, useSidebar } from '@rewind-ui/core';
 import { useState } from 'react';
 
-import SideBar from './SideBar';
 import NavBar from './NavBar';
+import SideBar from './SideBar';
 
 const Layout = () => {
   const [expanded, setExpanded] = useState(true);
@@ -33,7 +33,7 @@ const Layout = () => {
             className="md:hidden z-40"
           />
         )}
-        <header className="flex flex-row sticky top-0 px-8 items-center bg-white border-b border-b-gray-100 w-full shadow-sm min-h-[4rem]">
+        <header className="flex flex-row sticky top-0 items-center bg-white border-b border-b-gray-100 w-full shadow-sm min-h-[4rem]">
           <NavBar />
 
           <Button
@@ -54,14 +54,6 @@ const Layout = () => {
             </svg>
           </Button>
         </header>
-
-        <div className="w-full h-full p-8">
-          <p>Dashboard</p>
-        </div>
-
-        <div className="flex sticky bottom-0 items-center bg-white w-full min-h-[4rem] px-8">
-          <span>Footer</span>
-        </div>
       </main>
     </div>
   );
