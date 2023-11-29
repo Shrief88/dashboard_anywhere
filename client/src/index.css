@@ -16,7 +16,6 @@
   font-style: normal;
 }
 
-
 @font-face {
   font-family: CircularStd;
   src: url(./../public/fonts/CircularStd-Medium.woff2);
@@ -38,6 +37,10 @@
   font-style: normal;
 }
 
+#root{
+  min-width: 100%;
+  height: 100vh;
+}
 
 body {
   margin: 0;

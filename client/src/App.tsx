@@ -1,6 +1,21 @@
-import './App.css';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
+
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Router>
+      <div className="w-full h-full">
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
