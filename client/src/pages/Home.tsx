@@ -5,8 +5,6 @@ const Home = () => {
 
   localStorage.removeItem('token');
 
- 
-
   return (
     <div className="h-screen flex justify-center items-center bg-slate-100">
       <div className="flex flex-col gap-5 items-center">
