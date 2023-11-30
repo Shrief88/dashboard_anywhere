@@ -155,15 +155,6 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar color="transparent" position="static" elevation={0}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
-
           <Box sx={{ flexGrow: 1 }} />
           <Search>
             <SearchIconWrapper>
