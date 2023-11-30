@@ -8,7 +8,9 @@ export const quiz_list = asyncHandler(async (req, res) => {
     res.status(200).json({ data: quizData });
   } catch (error) {
     console.error("Error retrieving quizzes:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res
+      .status(500)
+      .json({ error: "Internal server error" });
   }
 });
 
@@ -46,21 +48,36 @@ export const quiz_create = asyncHandler(async (req, res) => {
 });
 
 // Handle quiz delete
-// export const quiz_delete_get = asyncHandler(async (req, res) => {
-//   res.send("NOT IMPLEMENTED: Quiz: " + req.params.id);
-// });
+export const quiz_delete = asyncHandler(async (req, res) => {
+  try {
+    const deletedQuiz = await QuizModel.findByIdAndDelete(req.params.id);
+    if (deletedQuiz) {
+      res.status(200).json({ data: deletedQuiz });
+    } else {
+      res.status(404).send({ error: "Quiz not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting quiz:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-// // Handle quiz delete on POST
-// export const quiz_delete_post = asyncHandler(async (req, res) => {
-//   res.send("NOT IMPLEMENTED: Quiz: " + req.params.id);
-// });
-
-// // Handle quiz update on GET
-// export const quiz_update_get = asyncHandler(async (req, res) => {
-//   res.send("NOT IMPLEMENTED: Quiz: " + req.params.id);
-// });
-
-// // Handle quiz update on POST
-// export const quiz_update_post = asyncHandler(async (req, res) => {
-//   res.send("NOT IMPLEMENTED: Quiz: " + req.params.id);
-// });
+// Handle quiz update
+export const quiz_update = asyncHandler(async (req, res) => {
+  const field = req.body.field;
+  const value = req.body.value;
+  const updatedField = {
+    [field]: value,
+  };
+  try {
+    const quiz = await QuizModel.findByIdAndUpdate(req.params.id, updatedField);
+    if (quiz) {
+      res.status(200).json({ data: quiz });
+    } else {
+      res.status(404).send({ error: "Quiz not found" });
+    }
+  } catch (err) {
+    console.error("Error updating quiz:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});

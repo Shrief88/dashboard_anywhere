@@ -9,12 +9,8 @@ quizRouter.get("/:id", quizController.quiz_detail);
 
 quizRouter.post("/create", quizController.quiz_create);
 
-// quizRouter.delete("/:id/delete", quizController.quiz_delete_get);
+quizRouter.delete("/:id/delete", quizController.quiz_delete);
 
-// quizRouter.post("/:id/delete", quizController.quiz_delete_post);
-
-// quizRouter.get("/:id/update", quizController.quiz_update_get);
-
-// quizRouter.post("/:id/update", quizController.quiz_update_post);
+quizRouter.put("/:id/update", quizController.quiz_update);
 
 export default quizRouter;

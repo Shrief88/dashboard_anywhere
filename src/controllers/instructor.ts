@@ -44,3 +44,37 @@ export const instructor_create = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+export const instructor_delete = asyncHandler(async (req, res) => {
+  try {
+    const deletedInstructor = await InstructorModel.findByIdAndDelete(req.params.id);
+    if (deletedInstructor) {
+      res.status(200).json({ data: deletedInstructor });
+    } else {
+      res.status(404).send({ error: "instructor not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting instructor:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Handle instructor update
+export const instructor_update = asyncHandler(async (req, res) => {
+  const field = req.body.field;
+  const value = req.body.value;
+  const updatedField = {
+    [field]: value,
+  };
+  try {
+    const instructor = await InstructorModel.findByIdAndUpdate(req.params.id, updatedField);
+    if (instructor) {
+      res.status(200).json({ data: instructor });
+    } else {
+      res.status(404).send({ error: "Quiz not found" });
+    }
+  } catch (err) {
+    console.error("Error updating quiz:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});

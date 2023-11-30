@@ -41,7 +41,7 @@ const host = HOST as string;
 const mongo_url = MONGO_URL as string;
 
 app.get("/", (req, res) => {
-  res.send("testing...");
+  res.send("listening...");
 });
 
 async function main() {

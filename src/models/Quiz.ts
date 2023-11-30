@@ -16,14 +16,4 @@ const QuizSchema: Schema = new Schema({
   due_to_hour: { type: Number, required: true },
 });
 
-QuizSchema.virtual("url").get(function () {
-  return `/quiz/${this.id}`;
-});
-
 export const QuizModel = mongoose.model<IQuiz>("Quiz", QuizSchema);
-
-
-
-
-
-

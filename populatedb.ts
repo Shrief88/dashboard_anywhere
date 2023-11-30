@@ -78,19 +78,19 @@ const announcementCreate = async (content: string, instructor_id: number) => {
 const createAnnouncements = async () => {
   await Promise.all([
     announcementCreate(
-      "This is an announcement",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut tellus faucibus leo tempor imperdiet mollis vel odio. Phasellus mattis neque nec enim ullamcorper, nec rutrum nisi accumsan. Cras vel massa massa.",
       (
         await InstructorModel.findOne({ id: 1 })
       )?._id
     ),
     announcementCreate(
-      "This is an announcement",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut tellus faucibus leo tempor imperdiet mollis vel odio. Phasellus mattis neque nec enim ullamcorper, nec rutrum nisi accumsan. Cras vel massa massa.",
       (
         await InstructorModel.findOne({ id: 2 })
       )?._id
     ),
     announcementCreate(
-      "This is an announcement",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut tellus faucibus leo tempor imperdiet mollis vel odio. Phasellus mattis neque nec enim ullamcorper, nec rutrum nisi accumsan. Cras vel massa massa.",
       (
         await InstructorModel.findOne({ id: 3 })
       )?._id
@@ -124,7 +124,7 @@ const createInstructors = async () => {
       "Ahmed",
       "Mustafa",
       "Math 101",
-      "/images/2.jpg",
+      "/images/2.jpeg",
       "male"
     ),
     instructorCreate(
