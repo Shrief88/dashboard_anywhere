@@ -1,4 +1,7 @@
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import React, { useEffect, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import requireAuth from '../Auth/requireAuth';
 import Announcement from '../components/Announcement';
@@ -10,54 +13,68 @@ const Dashboard = () => {
   const [announcements, setAnnouncement] = useState<Array<IAnnouncement>>([]);
   const [instructors, setInstructor] = useState<Array<IInstructor>>([]);
   const [quizzes, setQuiz] = useState<Array<IQuiz>>([]);
+  const [quizList, setQuizList] = useState<JSX.Element[]>([]);
+  const [announcementsList, setAnnouncementList] = useState<JSX.Element[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const announcementData: Array<IAnnouncement> = (await getAllAnnouncements()).data
+        .data;
+      const quizData: Array<IQuiz> = (await getAllQuizzes()).data.data;
+      const instructorData: Array<IInstructor> = [];
+      for (const item of announcementData) {
+        const instructor = (await getInstructorById(item.instructor)).data;
+        if (instructor) {
+          instructorData.push(instructor);
+        }
+      }
+      setInstructor(instructorData);
+      setQuiz(quizData);
+      setAnnouncement(announcementData);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const announcementData: Array<IAnnouncement> = (await getAllAnnouncements()).data
-          .data;
-        const quizData = (await getAllQuizzes()).data.data;
-        setQuiz(quizData);
-        setAnnouncement(announcementData);
-        for (const item of announcementData) {
-          const instructorData = (await getInstructorById(item.instructor)).data;
-          setInstructor((prevArray) => [...prevArray, instructorData.data]);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchData();
   }, []);
 
-  let quizList: JSX.Element[] = [];
-  if (quizzes.length > 0) {
-    quizList = quizzes.map((item) => (
-      <Quiz
-        key={item.title}
-        title={item.title}
-        course={item.course}
-        topic={item.topic}
-        due_to_day={item.due_to_day}
-        due_to_hour={item.due_to_hour}
-      />
-    ));
-  }
+  useEffect(() => {
+    if (quizzes.length > 0) {
+      const mappedQuizzes = quizzes.map((item) => (
+        <Quiz
+          key={item.title}
+          title={item.title}
+          course={item.course}
+          topic={item.topic}
+          due_to_day={item.due_to_day}
+          due_to_hour={item.due_to_hour}
+        />
+      ));
+      setQuizList(mappedQuizzes);
+    }
+  }, [quizzes]);
 
-  let announcementsList: JSX.Element[] = [];
-  if (announcements.length > 0 && instructors.length === announcements.length) {
-    announcementsList = announcements.map((item, index) => (
-      <Announcement
-        key={item.instructor}
-        first_name={instructors[index].first_name}
-        family_name={instructors[index].family_name}
-        Gender={instructors[index].Gender}
-        position={instructors[index].position}
-        content={item.content}
-        photoUrl={instructors[index].photoUrl}
-      />
-    ));
-  }
+  useEffect(() => {
+    if (announcements.length > 0 && instructors.length === announcements.length) {
+      const mappedAnnouncements = announcements.map((item, index) => (
+        <Announcement
+          key={item.instructor}
+          first_name={instructors[index].first_name}
+          family_name={instructors[index].family_name}
+          Gender={instructors[index].Gender}
+          position={instructors[index].position}
+          content={item.content}
+          photoUrl={instructors[index].photoUrl}
+        />
+      ));
+      setAnnouncementList(mappedAnnouncements);
+    }
+  }, [announcements, instructors]);
 
   return (
     <div className="p-8">
@@ -75,16 +92,16 @@ const Dashboard = () => {
 
       <div className="grid grid-col-1 xl:grid-cols-4 lg:grid-cols-3  mt-6 gap-12">
         <div className="xl:col-span-3 lg:col-span-2">
-          <div className="flex flex-col items-start p-4 bg-white gap-3 rounded-lg shadow-md">
+          <div className="flex flex-col p-4 bg-white gap-3 rounded-lg shadow-md">
             <h1 className="text-xl">Announcements</h1>
-            {announcementsList}
+            {loading ? <Skeleton count={3} /> : announcementsList}
           </div>
         </div>
 
         <div className="lg:col-span-1">
           <div className="flex flex-col p-4 bg-white gap-3 rounded-lg shadow-md">
             <h1 className="text-xl">what's due</h1>
-            {quizList}
+            {loading ? <Skeleton count={3} /> : quizList}
           </div>
         </div>
       </div>
